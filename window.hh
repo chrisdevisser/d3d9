@@ -76,6 +76,7 @@ enum class MessageLoopOptions {
 template<typename Interval = std::chrono::milliseconds, typename F, typename Fps = int>
 WPARAM MessageLoop(F f, const Fps &fps = 30, MessageLoopOptions opt = MessageLoopOptions::Sleep) {
     static_assert(std::is_arithmetic<Fps>::value, "FPS must be a number.");
+    auto now = []{return std::chrono::steady_clock::now();};
 
     MSG msg;
     while (true) {
@@ -88,13 +89,12 @@ WPARAM MessageLoop(F f, const Fps &fps = 30, MessageLoopOptions opt = MessageLoo
             DispatchMessage(&msg);
         }
 
-        auto getNow = [](){return std::chrono::steady_clock::now();};
-        thread_local auto last = getNow();
-        double passed = std::chrono::duration_cast<Interval>(getNow() - last).count();
+        thread_local auto last = now();
+        double passed = std::chrono::duration_cast<Interval>(now() - last).count();
 
         if (passed >= Interval::period::den * 1. / fps) {
             f(passed);
-            last = getNow();
+            last = now();
         } else if (opt == MessageLoopOptions::Sleep) {
             Sleep(Interval::period::den * 1. / fps - passed);
         }
@@ -119,15 +119,15 @@ namespace detail {
     template<typename Interval, typename Fps>
     DWORD WINAPI DefGameLoopThreadProc(LPVOID dataParam) {
         auto &data = *static_cast<DefGameLoopThreadProcData<Fps> *>(dataParam);
+        auto now = []{return std::chrono::steady_clock::now();};
 
         while (true) {
-            auto getNow = [](){return std::chrono::steady_clock::now();};
-            thread_local auto last = getNow();
-            double passed = std::chrono::duration_cast<Interval>(getNow() - last).count();
+            auto last = now();
+            double passed = std::chrono::duration_cast<Interval>(now() - last).count();
 
             if (passed >= Interval::period::den * 1. / data.fps) {
                 GameLoopThreadProc(passed);
-                last = getNow();
+                last = now();
             } else if (data.options == MessageLoopOptions::Sleep) {
                 Sleep(Interval::period::den * 1. / data.fps - passed);
             }
