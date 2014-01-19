@@ -1,9 +1,9 @@
-//3D vector
-
 #ifndef D3D9_VECTOR_H
 #define D3D9_VECTOR_H
 
 #include <d3dx9.h>
+
+//TODO add stuff
 
 namespace d3d9 {
 
@@ -41,3 +41,4 @@ inline Vector3 operator+(Vector3 lhs, const Vector3 &rhs) noexcept {
 }
 
 #endif
+

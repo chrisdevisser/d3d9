@@ -1,11 +1,8 @@
-//Copyright Chris DeVisser 2013
-//Code may be used freely in personal and commercial environments.
-//Compiled with GCC 4.8.1 and MinGWBuilds - http://sourceforge.net/projects/mingwbuilds/
-
 #ifndef D3D9_VERTICES_H
 #define D3D9_VERTICES_H
 
 #include <d3d9.h>
+#include "colour.hh"
 
 namespace d3d9 {
 
@@ -14,7 +11,7 @@ struct XyzRhwDiffuseVertex {
 
     XyzRhwDiffuseVertex() = default; //needed for trivial class requirement for POD for memcpy
     XyzRhwDiffuseVertex(double x_, double y_, double z_, double rhw_, Colour diffuse_)
-        : x(x_), y(y_), z(z_), rhw(rhw_), diffuse{diffuse_.d3d()} {}
+        : x(x_), y(y_), z(z_), rhw(rhw_), diffuse{d3d(diffuse_)} {}
 
     float x, y, z, rhw;
     D3DCOLOR diffuse;
@@ -25,7 +22,7 @@ struct XyzDiffuseVertex {
 
     XyzDiffuseVertex() = default;
     XyzDiffuseVertex(double x_, double y_, double z_, Colour diffuse_)
-        : x(x_), y(y_), z(z_), diffuse{diffuse_.d3d()} {}
+        : x(x_), y(y_), z(z_), diffuse{d3d(diffuse_)} {}
 
     float x, y, z;
     D3DCOLOR diffuse;

@@ -1,7 +1,3 @@
-//Copyright Chris DeVisser 2013
-//Code may be used freely in personal and commercial environments.
-//Compiled with GCC 4.8.1 and MinGWBuilds - http://sourceforge.net/projects/mingwbuilds/
-
 //Provides an easy way to query for hardware capabilities.
 
 #ifndef D3D9_CAPABILITIES_H

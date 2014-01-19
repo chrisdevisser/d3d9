@@ -1,40 +1,9 @@
-//Copyright Chris DeVisser 2013
-//Code may be used freely in personal and commercial environments.
-//Compiled with GCC 4.8.1 and MinGWBuilds - http://sourceforge.net/projects/mingwbuilds/
-
 #ifndef D3D9_ENUMS_H
 #define D3D9_ENUMS_H
 
-#include "flags.h"
+//Mimics D3D9 enums with strong typing.
 
 namespace d3d9 {
-
-enum class PrimitiveType {
-    PointList = 1,
-    LineList,
-    LineStrip,
-    TriangleList,
-    TriangleStrip,
-    TriangleFan
-};
-
-enum class FontWeight {
-    Default,
-    Thin = 100,
-    ExtraLight = 200,
-    UltraLight = 200,
-    Light = 300,
-    Normal = 400,
-    Regular = 400,
-    Medium = 500,
-    SemiBold = 600,
-    DemiBold = 600,
-    Bold = 700,
-    ExtraBold = 800,
-    UltraBold = 800,
-    Heavy = 900,
-    Black = 900
-};
 
 enum class Charset {
     Ansi = ANSI_CHARSET,
@@ -57,23 +26,10 @@ enum class Charset {
     Thai = THAI_CHARSET
 };
 
-enum class OutputPrecision {
-    Default = OUT_DEFAULT_PRECIS,
-    Raster = OUT_RASTER_PRECIS,
-    String = OUT_STRING_PRECIS
-};
-
-enum class Quality {
-    AntiAliased = ANTIALIASED_QUALITY,
-    NonAntiAliased = NONANTIALIASED_QUALITY,
-    Default = DEFAULT_QUALITY,
-    Draft = DRAFT_QUALITY
-};
-
-enum class Pitch {
-    Default = DEFAULT_PITCH,
-    Fixed = FIXED_PITCH,
-    Variable = VARIABLE_PITCH
+enum class Cull {
+    None = D3DCULL_NONE,
+    Cw = D3DCULL_CW,
+    Ccw = D3DCULL_CCW
 };
 
 enum class Family {
@@ -83,6 +39,66 @@ enum class Family {
     Roman = FF_ROMAN,
     Script = FF_SCRIPT,
     Swiss = FF_SWISS
+};
+
+enum class FontWeight {
+    Default = FW_DONTCARE,
+    Thin = FW_THIN,
+    ExtraLight = FW_EXTRALIGHT,
+    UltraLight = FW_ULTRALIGHT,
+    Light = FW_LIGHT,
+    Normal = FW_NORMAL,
+    Regular = FW_REGULAR,
+    Medium = FW_MEDIUM,
+    SemiBold = FW_SEMIBOLD,
+    DemiBold = FW_DEMIBOLD,
+    Bold = FW_BOLD,
+    ExtraBold = FW_EXTRABOLD,
+    UltraBold = FW_ULTRABOLD,
+    Heavy = FW_HEAVY,
+    Black = FW_BLACK
+};
+
+enum class OutputPrecision {
+    Default = OUT_DEFAULT_PRECIS,
+    Raster = OUT_RASTER_PRECIS,
+    String = OUT_STRING_PRECIS
+};
+
+enum class Pitch {
+    Default = DEFAULT_PITCH,
+    Fixed = FIXED_PITCH,
+    Variable = VARIABLE_PITCH
+};
+
+enum class PrimitiveType {
+    PointList = D3DPT_POINTLIST,
+    LineList = D3DPT_LINELIST,
+    LineStrip = D3DPT_LINESTRIP,
+    TriangleList = D3DPT_TRIANGLELIST,
+    TriangleStrip = D3DPT_TRIANGLESTRIP,
+    TriangleFan = D3DPT_TRIANGLEFAN
+};
+
+enum class Quality {
+    AntiAliased = ANTIALIASED_QUALITY,
+    NonAntiAliased = NONANTIALIASED_QUALITY,
+    Default = DEFAULT_QUALITY,
+    Draft = DRAFT_QUALITY
+};
+
+enum class TransformStateType {
+    World = D3DTS_WORLD,
+    View = D3DTS_VIEW,
+    Projection = D3DTS_PROJECTION,
+    Texture0 = D3DTS_TEXTURE0,
+    Texture1 = D3DTS_TEXTURE1,
+    Texture2 = D3DTS_TEXTURE2,
+    Texture3 = D3DTS_TEXTURE3,
+    Texture4 = D3DTS_TEXTURE4,
+    Texture5 = D3DTS_TEXTURE5,
+    Texture6 = D3DTS_TEXTURE6,
+    Texture7 = D3DTS_TEXTURE7,
 };
 
 }

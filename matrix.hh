@@ -1,13 +1,13 @@
-//Copyright Chris DeVisser 2013
-//Code may be used freely in personal and commercial environments.
-//Compiled with GCC 4.8.1 and MinGWBuilds - http://sourceforge.net/projects/mingwbuilds/
+//A mathematical matrix with D3D9 support.
 
 #ifndef D3D9_MATRIX_H
 #define D3D9_MATRIX_H
 
 #include <utility>
 #include <d3dx9.h>
-#include "angle.h"
+#include <stdx/angle.hh>
+
+//TODO add stuff
 
 namespace d3d9 {
 
@@ -49,11 +49,11 @@ struct Matrix {
         return *this;
     }
 
-    const D3DXMATRIX &get() const {
+    const D3DXMATRIX &d3d() const {
         return mat_;
     }
 
-    D3DXMATRIX &get() {
+    D3DXMATRIX &d3d() {
         return mat_;
     }
 
@@ -68,7 +68,7 @@ private:
     }
 };
 
-Matrix operator*(Matrix lhs, const Matrix &rhs) {
+inline Matrix operator*(Matrix lhs, const Matrix &rhs) {
     return lhs *= rhs;
 }
 

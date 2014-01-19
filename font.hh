@@ -3,9 +3,9 @@
 
 #include <string>
 #include <d3dx9.h>
-#include "comptr.h"
-#include "device.h"
-#include "enums.h"
+#include "device.hh"
+#include "enums.hh"
+#include <dxutil/comptr.hh>
 
 namespace d3d9 {
 

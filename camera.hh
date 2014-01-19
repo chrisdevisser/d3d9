@@ -1,51 +1,29 @@
-//Copyright Chris DeVisser 2013
-//Code may be used freely in personal and commercial environments.
-//Compiled with GCC 4.8.1 and MinGWBuilds - http://sourceforge.net/projects/mingwbuilds/
-
 //Performs operations related to a camera.
 
 #ifndef D3D9_CAMERA_H
 #define D3D9_CAMERA_H
 
-#include <d3dx9.h>
-#include "matrix.h"
-#include "vector.h"
+#include "vector.hh"
 
 namespace d3d9 {
 
+class Matrix;
+
 struct Camera {
-    Camera(Vector3 eye = {0, 0, -100}, Vector3 at = {}, Vector3 up = {0, 1, 0})
-        : eye_{eye}, at_{at}, up_{up} {}
+    Camera(const Vector3 &_eye = {0, 0, -100}, const Vector3 &_at = {}, const Vector3 &_up = {0, 1, 0}) noexcept;
 
-    Matrix matrix() const {
-        Matrix ret;
-        return *D3DXMatrixLookAtLH(&ret.get(), &eye_.get(), &at_.get(), &up_.get());
-    }
+    Matrix matrix() const noexcept;
 
-    Camera &moveTo(double x, double y, double z) {
-        eye_ = {x, y, z};
-        return *this;
-    }
+    Camera &moveTo(double x, double y, double z) noexcept; //eye
+    Camera &move(double x, double y, double z) noexcept;
+    Camera &swingTo(double x, double y, double z) noexcept; //at
+    Camera &swing(double x, double y, double z) noexcept;
+    Camera &turnTo(double x, double y, double z) noexcept; //up
+    Camera &turn(double x, double y, double z) noexcept;
 
-    Camera &move(double x, double y, double z) {
-        eye_ += {x, y, z};
-        return *this;
-    }
-
-    Camera &swingTo(double x, double y, double z) {
-        at_ = {x, y, z};
-        return *this;
-    }
-
-    Camera &swing(double x, double y, double z) {
-        at_ += {x, y, z};
-        return *this;
-    }
-
-    Camera &turnTo(double x, double y, double z) {
-        up_ = {x, y, z};
-        return *this;
-    }
+    Vector3 eye() const noexcept;
+    Vector3 at() const noexcept;
+    Vector3 up() const noexcept;
 
 private:
     Vector3 eye_;
